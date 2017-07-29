@@ -3,10 +3,10 @@
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
-        "psr-0": {"Devbr\\Composer": "src/"}
+        "psr-0": {"Devbr\\": ""}
     },
     "extra": {
-        "class": "Devbr\\Composer\\TemplateInstallerPlugin"
+        "class": "Devbr\\Node"
     },
     "require": {
         "composer-plugin-api": "^1.0"
