@@ -1,0 +1,17 @@
+{
+    "name": "devbr/install-plugin",
+    "type": "composer-plugin",
+    "license": "MIT",
+    "autoload": {
+        "psr-0": {"Devbr\\Composer": "/"}
+    },
+    "extra": {
+        "class": "Devbr\\Composer\\TemplateInstallerPlugin"
+    },
+    "require": {
+        "composer-plugin-api": "^1.0"
+    },
+    "require-dev": {
+        "composer/composer": "^1.3"
+    }
+}
