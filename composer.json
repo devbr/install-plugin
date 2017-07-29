@@ -3,10 +3,10 @@
     "type": "composer-plugin",
     "license": "MIT",
     "autoload": {
-        "psr-0": {"Devbr\\": ""}
+        "psr-4": {"Devbr\\Composer\\": "src/"}
     },
     "extra": {
-        "class": "Devbr\\Node"
+        "class": "Devbr\\Composer\\Node"
     },
     "require": {
         "composer-plugin-api": "^1.0"
