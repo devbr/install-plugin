@@ -1,6 +1,6 @@
 <?php
 
-namespace Devbr;
+namespace Devbr\Composer;
 
 use Composer\Composer;
 use Composer\IO\IOInterface;
