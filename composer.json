@@ -6,7 +6,7 @@
         "psr-4": {"Devbr\\Composer\\": "src/"}
     },
     "extra": {
-        "class": "Devbr\\Composer\\Node"
+        "class": "Devbr\\Composer\\Plugin"
     },
     "require": {
         "composer-plugin-api": "^1.0"
