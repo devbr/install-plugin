@@ -22,7 +22,7 @@ class Installer extends LibraryInstaller
             );
         }
 
-        return 'data/templates/'.substr($package->getPrettyName(), 23);
+        return 'data/templates/'.substr($package->getPrettyName(), 15);
     }
 
     /**
