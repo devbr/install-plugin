@@ -21,7 +21,7 @@ class Installer extends LibraryInstaller
             );
         }
 
-        return '.php/Pack/'.substr($package->getPrettyName(), 11);
+        return '.php/Pack/'.ucfirst(substr($package->getPrettyName(), 11));
     }
 
     /**
