@@ -12,17 +12,16 @@ class Installer extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
-        $prefix = substr($package->getPrettyName(), 0, 15);
-        exit("\n\n\t ---> ".$prefix);
-        if ('devbr/template-' !== $prefix) {
+        $prefix = substr($package->getPrettyName(), 0, 11);
+        if ('devbr/pack-' !== $prefix) {
             throw new \InvalidArgumentException(
-                'Unable to install template, devbr templates '
+                'Unable to install pack, devbr packs '
                 .'should always start their package name with '
-                .'"devbr/template-"'
+                .'"devbr/pack-"'
             );
         }
 
-        return 'data/templates/'.substr($package->getPrettyName(), 15);
+        return '.php/Pack/'.substr($package->getPrettyName(), 11);
     }
 
     /**
@@ -30,6 +29,6 @@ class Installer extends LibraryInstaller
      */
     public function supports($packageType)
     {
-        return 'devbr-template' === $packageType;
+        return 'devbr-pack' === $packageType;
     }
 }
