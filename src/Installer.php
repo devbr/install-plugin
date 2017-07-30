@@ -12,7 +12,7 @@ class Installer extends LibraryInstaller
      */
     public function getInstallPath(PackageInterface $package)
     {
-        $prefix = substr($package->getPrettyName(), 0, 23);
+        $prefix = substr($package->getPrettyName(), 0, 15);
         exit("\n\n\t ---> ".$prefix);
         if ('devbr/template-' !== $prefix) {
             throw new \InvalidArgumentException(
