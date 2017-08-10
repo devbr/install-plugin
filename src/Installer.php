@@ -5,6 +5,8 @@ namespace Devbr\Composer;
 use Composer\Package\PackageInterface;
 use Composer\Installer\LibraryInstaller;
 
+use Composer\Repository\InstalledRepositoryInterface;
+
 class Installer extends LibraryInstaller
 {
     /**
