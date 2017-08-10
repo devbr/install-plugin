@@ -15,6 +15,7 @@ class Installer extends LibraryInstaller
 {
 
     private $phpDir = '';
+    private $packName = '';
 
     /**
      * {@inheritDoc}
@@ -45,7 +46,8 @@ class Installer extends LibraryInstaller
             );
         }
 
-        return '.php/Pack/'.ucfirst(substr($package->getPrettyName(), 11));
+        $this->packName = ucfirst(substr($package->getPrettyName(), 11));
+        return '.php/Pack/'.$this->packName;
     }
 
     /**
@@ -75,19 +77,33 @@ class Installer extends LibraryInstaller
         }
         
         //ME Code ----
-        $packConfig = $downloadPath.'/Config';
         $appConfig =  $this->phpDir.'/Config';
+        $publicWeb =  dirname($this->phpDir);
+        $appAssets =  $publicWeb.'/'.strtolower($this->packName);
 
-        echo "\n\n\tPackConfig: $packConfig\n\tAppConfig: $appConfig\n\n";
-        echo "\n\n\tHtmlPath: ".(defined('_HTML') ? _HTML : 'indefinido...')."\n\n";
+        $packConfig = $downloadPath.'/Config';
+        $packAssets = $downloadPath.'/Assets';
+
+        echo "\n\n\tPackConfig: $packConfig\n\tAppConfig: $appConfig\n\tPublicPath: $publicWeb";
 
         if(file_exists($packConfig) && is_readable($packConfig)){
-            echo "\n\t--- Config exists ---";
+            echo "\n\t--- Config exists ---\n";
             self::checkAndOrCreateDir($appConfig, true);
             self::copyDirectoryContents($packConfig, $appConfig);
         } else {
-            echo "\n\t--- Config Not Exists!! ---";
+            echo "\n\t--- Config Not Exists!! ---\n";
         }
+
+        //Copy ASSETS
+        if(file_exists($packAssets) && is_readable($packAssets)){
+            echo "\n\t--- Assets exists ---\n";
+            self::checkAndOrCreateDir($appAssets, true);
+            self::copyDirectoryContents($packAssets, $appAssets);
+        } else {
+            echo "\n\t--- Assets Not Exists!! ---\n";
+        }
+
+
     }
 
 
