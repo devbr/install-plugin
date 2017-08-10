@@ -76,7 +76,7 @@ class Installer extends LibraryInstaller
             $repo->addPackage(clone $package);
         }
         
-        //ME Code ----
+        // Devbr install code:
         $appConfig =  $this->phpDir.'/Config';
         $publicWeb =  dirname($this->phpDir);
         $appAssets =  $publicWeb.'/'.strtolower($this->packName);
@@ -84,26 +84,19 @@ class Installer extends LibraryInstaller
         $packConfig = $downloadPath.'/Config';
         $packAssets = $downloadPath.'/Assets';
 
-        echo "\n\n\tPackConfig: $packConfig\n\tAppConfig: $appConfig\n\tPublicPath: $publicWeb";
-
+        // Move Configurations... 
         if(file_exists($packConfig) && is_readable($packConfig)){
-            echo "\n\t--- Config exists ---\n";
             self::checkAndOrCreateDir($appConfig, true);
             self::copyDirectoryContents($packConfig, $appConfig);
-        } else {
-            echo "\n\t--- Config Not Exists!! ---\n";
+            self::removeDirectory($packConfig);
         }
 
-        //Copy ASSETS
+        // Move Assets...
         if(file_exists($packAssets) && is_readable($packAssets)){
-            echo "\n\t--- Assets exists ---\n";
             self::checkAndOrCreateDir($appAssets, true);
             self::copyDirectoryContents($packAssets, $appAssets);
-        } else {
-            echo "\n\t--- Assets Not Exists!! ---\n";
+            self::removeDirectory($packAssets);
         }
-
-
     }
 
 
@@ -177,5 +170,31 @@ class Installer extends LibraryInstaller
             }
         }
         return $report;
+    }
+
+
+    /**
+     * Remove Directory 
+     * 
+     * @param  string $src pack of directory to remove
+     * 
+     * @return void        void
+     */
+    static private function removeDirectory($src) 
+    {
+        $dir = opendir($src);
+        while(false !== ( $file = readdir($dir)) ) {
+            if ($file != '.' && $file != '..') {
+                $full = $src . '/' . $file;
+
+                if ( is_dir($full) ) {
+                    self::removeDirectory($full);
+                } else {
+                    unlink($full);
+                }
+            }
+        }
+        closedir($dir);
+        rmdir($src);
     }
 }
