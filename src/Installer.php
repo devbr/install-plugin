@@ -5,10 +5,33 @@ namespace Devbr\Composer;
 use Composer\Package\PackageInterface;
 use Composer\Installer\LibraryInstaller;
 
+use Composer\Composer;
+use Composer\IO\IOInterface;
 use Composer\Repository\InstalledRepositoryInterface;
+use Composer\Package\PackageInterface;
+use Composer\Util\Filesystem;
+use Composer\Util\Silencer;
 
 class Installer extends LibraryInstaller
 {
+
+    private $phpDir = '';
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct(
+        IOInterface $io, 
+        Composer $composer, 
+        $type = 'library', 
+        Filesystem $filesystem = null, 
+        BinaryInstaller $binaryInstaller = null
+    ){
+        parent::__construct($io, $composer, $type = 'library', $filesystem = null, $binaryInstaller = null);
+        $this->phpDir = dirname(rtrim($composer->getConfig()->get('vendor-dir'), '/'));
+    }
+
+
     /**
      * {@inheritDoc}
      */
@@ -54,7 +77,7 @@ class Installer extends LibraryInstaller
         
         //ME Code ----
         $packConfig = $downloadPath.'/Config';
-        $appConfig =  $this->baseDir.'/.php/Config';
+        $appConfig =  $this->phpDir.'/.php/Config';
 
         echo "\n\n\tPackConfig: $packConfig\n\tAppConfig: $appConfig\n\n";
 
