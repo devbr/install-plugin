@@ -62,6 +62,8 @@ class Installer extends LibraryInstaller
             echo "\n\t--- Config exists ---";
             self::checkAndOrCreateDir($appConfig, true);
             self::copyDirectoryContents($packConfig, $appConfig);
+        } else {
+            echo "\n\t--- Config Not Exists!! ---";
         }
     }
 
