@@ -76,9 +76,10 @@ class Installer extends LibraryInstaller
         
         //ME Code ----
         $packConfig = $downloadPath.'/Config';
-        $appConfig =  $this->phpDir.'/.php/Config';
+        $appConfig =  $this->phpDir.'/Config';
 
         echo "\n\n\tPackConfig: $packConfig\n\tAppConfig: $appConfig\n\n";
+        echo "\n\n\tHtmlPath: ".(defined('_HTML') ? _HTML : 'indefinido...')."\n\n";
 
         if(file_exists($packConfig) && is_readable($packConfig)){
             echo "\n\t--- Config exists ---";
