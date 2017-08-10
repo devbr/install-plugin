@@ -31,4 +31,26 @@ class Installer extends LibraryInstaller
     {
         return 'devbr-pack' === $packageType;
     }
+    
+    
+    /**
+     * {@inheritDoc}
+     */
+    public function install(InstalledRepositoryInterface $repo, PackageInterface $package)
+    {
+        $this->initializeVendorDir();
+        $downloadPath = $this->getInstallPath($package);
+        // remove the binaries if it appears the package files are missing
+        if (!is_readable($downloadPath) && $repo->hasPackage($package)) {
+            $this->binaryInstaller->removeBinaries($package);
+        }
+        $this->installCode($package);
+        $this->binaryInstaller->installBinaries($package, $this->getInstallPath($package));
+        if (!$repo->hasPackage($package)) {
+            $repo->addPackage(clone $package);
+        }
+        
+        //ME Code ----
+        if(file_exists($downloadPath.'/Config') && is_read...
+    }
 }
