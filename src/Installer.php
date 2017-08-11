@@ -79,7 +79,7 @@ class Installer extends LibraryInstaller
         // Devbr install code:
         $appConfig =  $this->phpDir.'/Config';
         $publicWeb =  dirname($this->phpDir);
-        $appAssets =  $publicWeb.'/'.strtolower($this->packName);
+        //$appAssets =  $publicWeb.'/'.strtolower($this->packName);
 
         $packConfig = $downloadPath.'/Config';
         $packAssets = $downloadPath.'/Assets';
@@ -93,8 +93,8 @@ class Installer extends LibraryInstaller
 
         // Move Assets...
         if(file_exists($packAssets) && is_readable($packAssets)){
-            self::checkAndOrCreateDir($appAssets, true);
-            self::copyDirectoryContents($packAssets, $appAssets);
+            self::checkAndOrCreateDir($publicWeb, true);
+            self::copyDirectoryContents($packAssets, $publicWeb);
             self::removeDirectory($packAssets);
         }
     }
